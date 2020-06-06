@@ -1,1 +1,1 @@
-# Trash-iine's programming competition libralies
+# Trash-iine's programming competition libraries
