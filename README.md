@@ -2,7 +2,7 @@
 
 # Generate snippets
 
-## Installing
+## Preparation
 
 You need to install `rustfmt` and `cargo-snippet`.
 
