@@ -1,20 +1,21 @@
 extern crate num_traits;
 
-fn mod_pow<T>(mut base: T, mut exp: T, modulus: T) -> T
+#[snippet(name = "defmodpow", prefix = "extern crate num_traits;")]
+fn mod_pow<T>(mut base: T, mut exp: T, modules: T) -> T
 where
     T: num_traits::PrimInt,
 {
-    if modulus == T::from(1).unwrap() {
+    if modules == T::from(1).unwrap() {
         return T::from(0).unwrap();
     }
     let mut result = T::from(1).unwrap();
-    base = base % modulus;
+    base = base % modules;
     while exp > T::from(0).unwrap() {
         if exp % T::from(2).unwrap() == T::from(1).unwrap() {
-            result = result * base % modulus;
+            result = result * base % modules;
         }
         exp = exp >> 1;
-        base = base * base % modulus
+        base = base * base % modules
     }
     result
 }

@@ -1,4 +1,5 @@
 // input macro from https://qiita.com/tanakh/items/0ba42c7ca36cd29d0ac8
+#[snippet(name = "def_input", include = "def_input_inner")]
 macro_rules! input {
     (source = $s:expr, $($r:tt)*) => {
         let mut iter = $s.split_whitespace();
@@ -20,6 +21,7 @@ macro_rules! input {
     };
 }
 
+#[snippet(name = "def_input_inner", include = "def_read_value")]
 macro_rules! input_inner {
     ($next:expr) => {};
     ($next:expr, ) => {};
@@ -30,6 +32,7 @@ macro_rules! input_inner {
     };
 }
 
+#[snippet(name = "def_read_value")]
 macro_rules! read_value {
     ($next:expr, ( $($t:tt),* )) => {
         ( $(read_value!($next, $t)),* )
