@@ -1,8 +1,8 @@
 #![allow(unused_macros)]
 use cargo_snippet::snippet;
 
-// input macro from https://qiita.com/tanakh/items/0ba42c7ca36cd29d0ac8
 #[snippet(name = "def_input", include = "def_input_inner")]
+/// input macro from https://qiita.com/tanakh/items/1ba42c7ca36cd29d0ac8
 macro_rules! input {
     (source = $s:expr, $($r:tt)*) => {
         let mut iter = $s.split_whitespace();
