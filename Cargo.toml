@@ -1,7 +1,7 @@
 [package]
 name = "tcl"
 version = "0.1.0"
-authors = ["trash-iine <kantera.primenumbers@gmail.com>"]
+authors = ["trash-iine"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

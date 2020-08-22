@@ -17,7 +17,7 @@ Generate snippets for vscode.
 
 ```bash
 $ mkdir .vscode
-$ touch rust.code-snippets
+$ touch .vscode/rust.code-snippets
 $ cargo snippet -t vscode > .vscode/rust.code-snippets
 ```
 
