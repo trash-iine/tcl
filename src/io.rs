@@ -1,7 +1,7 @@
-#![allow(unused_macros)]
+#![allow(unused_macros, dead_code)]
 use cargo_snippet::snippet;
 
-#[snippet(name = "def_input")]
+#[snippet(name = "@input")]
 /// input macro from https://qiita.com/tanakh/items/1ba42c7ca36cd29d0ac8
 macro_rules! read_value {
     ($next:expr, ( $($t:tt),* )) => {
@@ -25,7 +25,7 @@ macro_rules! read_value {
     };
 }
 
-#[snippet(name = "def_input")]
+#[snippet(name = "@input")]
 macro_rules! input_inner {
     ($next:expr) => {};
     ($next:expr, ) => {};
@@ -36,7 +36,7 @@ macro_rules! input_inner {
     };
 }
 
-#[snippet(name = "def_input")]
+#[snippet(name = "@input")]
 macro_rules! input {
     (source = $s:expr, $($r:tt)*) => {
         let mut iter = $s.split_whitespace();
@@ -55,5 +55,24 @@ macro_rules! input {
                 .collect()
         };
         input_inner!{next, $($r)*}
+    };
+}
+
+#[snippet(name = "@print_with_yes_no")]
+fn print_with_yes_no(b: bool) {
+    if b {
+        println!("Yes");
+    }
+    else {
+        println!("No");
+    }
+}
+
+#[snippet(name = "@rough_print")]
+macro_rules! rough_print {
+    ($x:expr $(, $s:expr)*) => {
+        print!("{:?}", $x);
+        $( print!(", {:?}", $s); )*
+        println!("");
     };
 }

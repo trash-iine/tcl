@@ -2,7 +2,7 @@
 extern crate num_traits;
 use cargo_snippet::snippet;
 
-#[snippet(name = "def_mod_pow", prefix = "extern crate num_traits;")]
+#[snippet(name = "@mod_pow", prefix = "extern crate num_traits;")]
 fn mod_pow<T>(mut base: T, mut exp: T, modules: T) -> T
 where
     T: num_traits::PrimInt,
@@ -22,7 +22,7 @@ where
     result
 }
 
-#[snippet(name = "def_fast_pow", prefix = "extern crate num_traits;")]
+#[snippet(name = "@fast_pow", prefix = "extern crate num_traits;")]
 fn fast_pow<T>(mut base: T, mut exp: T) -> T
 where
     T: num_traits::PrimInt,
