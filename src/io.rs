@@ -1,7 +1,7 @@
 #![allow(unused_macros)]
 use cargo_snippet::snippet;
 
-#[snippet(name = "def_read_value")]
+#[snippet(name = "def_input")]
 /// input macro from https://qiita.com/tanakh/items/1ba42c7ca36cd29d0ac8
 macro_rules! read_value {
     ($next:expr, ( $($t:tt),* )) => {
@@ -25,7 +25,7 @@ macro_rules! read_value {
     };
 }
 
-#[snippet(name = "def_input_inner", include = "def_read_value")]
+#[snippet(name = "def_input")]
 macro_rules! input_inner {
     ($next:expr) => {};
     ($next:expr, ) => {};
@@ -36,7 +36,7 @@ macro_rules! input_inner {
     };
 }
 
-#[snippet(name = "def_input", include = "def_input_inner")]
+#[snippet(name = "def_input")]
 macro_rules! input {
     (source = $s:expr, $($r:tt)*) => {
         let mut iter = $s.split_whitespace();
