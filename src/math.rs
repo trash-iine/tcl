@@ -38,6 +38,27 @@ where
     result
 }
 
+#[snippet(name = "@gcd", prefix = "extern crate num_traits;")]
+fn gcd<T>(a: T, b: T) -> T
+where
+    T: num_traits::PrimInt,
+{
+    if b == T::from(0).unwrap() {
+        a
+    }
+    else {
+        gcd(b, a % b)
+    }
+}
+
+#[snippet(name = "@gcd_list", include = "@gcd")]
+fn gcd_list<T>(list: &[T]) -> T
+where
+    T: num_traits::PrimInt,
+{
+    list.iter().fold(list[0], |a, &b| gcd(a, b))
+}
+
 #[test]
 fn test_mod_pow() {
     assert_eq!(mod_pow(3 as i8, 4 as i8, 4 as i8), 1 as i8);
