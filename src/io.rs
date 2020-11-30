@@ -70,8 +70,8 @@ fn print_with_yes_no(b: bool) {
 #[snippet(name = "@rough_print")]
 macro_rules! rough_print {
     ($x:expr $(, $s:expr)*) => {
-        print!("{:?}", $x);
-        $( print!(", {:?}", $s); )*
+        print!("{:?}", ($x));
+        $( print!(", {:?}", ($s)); )*
         println!("");
     };
 }
