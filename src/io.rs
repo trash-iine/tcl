@@ -62,8 +62,7 @@ macro_rules! input {
 fn print_with_yes_no(b: bool) {
     if b {
         println!("Yes");
-    }
-    else {
+    } else {
         println!("No");
     }
 }
@@ -75,4 +74,15 @@ macro_rules! rough_print {
         $( print!(", {:?}", $s); )*
         println!("");
     };
+}
+
+#[snippet(name = "@naive_input")]
+fn naive_input<T>() -> T
+where
+    T: std::str::FromStr,
+    <T as std::str::FromStr>::Err: std::fmt::Debug,
+{
+    let mut word = String::new();
+    std::io::stdin().read_line(&mut word).ok();
+    return word.trim().to_string().parse().unwrap();
 }
