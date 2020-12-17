@@ -58,6 +58,29 @@ macro_rules! input {
     };
 }
 
+#[snippet(name = "@input")]
+macro_rules! input_one_line {
+    (source = $s:expr, $($r:tt)*) => {
+        let mut iter = $s.split_whitespace();
+        let mut next = || { iter.next().unwrap() };
+        input_inner!{next, $($r)*}
+    };
+    ($($r:tt)*) => {
+        let mut words = String::new();
+        std::io::stdin().read_line(&mut words).ok();
+        let mut bytes = words.bytes();
+        let mut next = move || -> String{
+            bytes
+                .by_ref()
+                .map(|r|r as char)
+                .skip_while(|c|c.is_whitespace())
+                .take_while(|c|!c.is_whitespace())
+                .collect()
+        };
+        input_inner!{next, $($r)*}
+    };
+}
+
 #[snippet(name = "@print_with_yes_no")]
 fn print_with_yes_no(b: bool) {
     if b {
@@ -74,15 +97,4 @@ macro_rules! rough_print {
         $( print!(", {:?}", ($s)); )*
         println!("");
     };
-}
-
-#[snippet(name = "@naive_input")]
-fn naive_input<T>() -> T
-where
-    T: std::str::FromStr,
-    <T as std::str::FromStr>::Err: std::fmt::Debug,
-{
-    let mut word = String::new();
-    std::io::stdin().read_line(&mut word).ok();
-    return word.trim().to_string().parse().unwrap();
 }
