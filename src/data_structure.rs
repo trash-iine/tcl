@@ -6,8 +6,8 @@ struct UnionFind<T>
 where
     T: Clone + Eq + std::hash::Hash,
 {
-    map:  std::collections::HashMap<T, usize>,
-    par:  Vec<T>,
+    map: std::collections::HashMap<T, usize>,
+    par: Vec<T>,
     rank: Vec<usize>,
 }
 
@@ -23,8 +23,8 @@ where
             map.insert(v.clone(), i);
         }
         Self {
-            map:  map,
-            par:  init,
+            map: map,
+            par: init,
             rank: vec![0; len],
         }
     }
@@ -33,16 +33,14 @@ where
         let i_ind = {
             if let Some(&ind) = self.map.get(&i) {
                 ind
-            }
-            else {
+            } else {
                 panic!("The value can't be found. [in find of UnionFind]");
             }
         };
 
         if i == self.par[i_ind] {
             return i;
-        }
-        else {
+        } else {
             let par = self.par[i_ind].clone();
             let tmp = self.find(par);
 
@@ -53,7 +51,9 @@ where
     }
 
     #[inline]
-    fn same(&mut self, i: T, j: T) -> bool { self.find(i) == self.find(j) }
+    fn same(&mut self, i: T, j: T) -> bool {
+        self.find(i) == self.find(j)
+    }
 
     fn unite(&mut self, i: T, j: T) {
         let i_par = self.find(i);
@@ -62,8 +62,7 @@ where
         let i_par_ind = {
             if let Some(&ind) = self.map.get(&i_par) {
                 ind
-            }
-            else {
+            } else {
                 panic!("The value can't be found. [in unite of UnionFind]");
             }
         };
@@ -71,16 +70,14 @@ where
         let j_par_ind = {
             if let Some(&ind) = self.map.get(&j_par) {
                 ind
-            }
-            else {
+            } else {
                 panic!("The value can't be found. [in unite of UnionFind]");
             }
         };
 
         if self.rank[i_par_ind] > self.rank[j_par_ind] {
             self.par[j_par_ind] = i_par;
-        }
-        else {
+        } else {
             self.par[i_par_ind] = j_par;
             if self.rank[i_par_ind] == self.rank[j_par_ind] {
                 self.rank[j_par_ind] += 1;
@@ -88,3 +85,34 @@ where
         }
     }
 }
+
+pub struct SegmentTree<T> {
+    n: usize,
+    list: Vec<T>,
+}
+
+/*
+impl<T> SegmentTree<T>
+where
+    T: Copy + MAX,
+{
+    pub fn new(v: Vec<T>) -> Self {
+        let x = v.len();
+        let mut n = 1usize;
+        while n < x {
+            n *= 2;
+        }
+
+        let mut list = vec![T::Max; 2 * n - 1];
+
+        for (i, &var) in v.iter().enumerate() {
+            list[i + n - 1] = var;
+        }
+
+        return Self {
+            n: v.len(),
+            list: v,
+        };
+    }
+}
+*/
